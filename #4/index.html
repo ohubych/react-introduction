@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://unpkg.com/react@16.3.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.3.0/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+<!-- prop-types -->
+<script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+
+<div id="root"></div>
+
+<script type="text/babel">
+    // Validate Custom React Component Props with PropTypes
+    class SayHello extends React.Component {
+        static propTypes = {
+            firstName: PropTypes.string.isRequired,
+            lastName: PropTypes.string.isRequired
+        }
+
+        render() {
+            const {firstName, lastName} = this.props;
+            return (<h1>Hello {firstName} {lastName}!</h1>);
+        };
+    }
+
+    // PropTypes writen by me
+    // const PropTypes = {
+    //     string: (props, propName, componentName) => {
+    //         if (typeof props[propName] !== 'string') {
+    //             return new Error(`Hey you should pass a string for ${propName} in ${componentName} but you pass ${typeof props[propName]}`);
+    //         }
+    //     }
+    // };
+
+    ReactDOM.render(<SayHello firstName={true}/>, document.getElementById('root'));
+
+</script>
+</body>
+</html>
