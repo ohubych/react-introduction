@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Styled component</title>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@16.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+<script src="https://unpkg.com/styled-components@4.3.2/dist/styled-components.js"></script>
+
+
+<script type="text/babel">
+    // Style React Components with className and In Line Styles
+    const rootElement = document.getElementById('root');
+
+    const Button = styled.a`
+          width: ${(props) => props.fullWithProps ? '100%' : 'auto'};
+          padding: 8px 16px;
+          background-color: salmon;
+          color: snow;
+          border: 0;
+          border-radius: 0.2rem;
+          font-size: 1rem;
+          cursor: pointer;
+
+          &:hover,
+          &:active {
+            background-color: crimson;
+          }
+
+          &:focus {
+            outline: 0;
+            box-shadow: 0 0 0 2px white, 0 0 0 4px salmon;
+          }
+
+          @media (max-width: 550px) {
+            width: 100%;
+          }
+    `;
+
+    const LargeButton = styled(Button)`
+        font-size: 2rem;
+    `;
+
+    ReactDOM.render(
+        <div>
+            <Button as="button"
+                href="https://github.com/styled-components/styled-components"
+                target="_blank"
+                rel="noopener"
+                fullWithProps
+            >
+                GitHub
+            </Button>
+            <Button href="/docs" prefetch>
+                Documentation
+            </Button>
+            <LargeButton>Large Documentation</LargeButton>
+        </div>, rootElement
+    );
+
+
+</script>
+
+</body>
+</html>

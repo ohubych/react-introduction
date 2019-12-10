@@ -35,22 +35,17 @@
 <script type="text/babel">
     // Style React Components with className and In Line Styles
     const rootElement = document.getElementById('root');
+    const props = {
+        className: 'box box--medium'
+    }
 
-    function Box({ style, size, className = '', ...rest }) {
-        const sizeClassName = size ? `box--${size}` : '';
-        return (
-          <div className={`box ${className} ${sizeClassName}`}
-               style={ {paddingLeft: 20, ...style} }
-               {...rest}
-          />
-        );
-    };
+    function Box({ size, className, style }) {
+        return (<div className={props.className}>Box</div>)
+    }
 
-    const element = (
-        <div>
-            <Box size='small'>Small box</Box>
-            <Box size='medium' style={ {backgroundColor: 'yellow', marginBottom: 50} }>Medium box</Box>
-        </div>);
+    const element = (<div>
+        <Box/>
+    </div>);
 
     ReactDOM.render(element, rootElement);
 
