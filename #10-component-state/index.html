@@ -16,9 +16,14 @@
     const rootElement = document.getElementById('root');
 
     class StopWatch extends React.Component {
-        state = { laps: 0, running: false };
 
-        handleStart = () => {
+        constructor(...args) {
+            super(...args);
+            this.state = { laps: 0, running: false };
+            this.handleStart = this.handleStart.bind(this);
+        }
+
+        handleStart() {
             this.setState({ running: !this.state.running });
             if(this.state.running) {
                 clearInterval(this.timer);
