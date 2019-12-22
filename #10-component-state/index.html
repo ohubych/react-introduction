@@ -31,6 +31,10 @@
             this.setState({ laps: 0 });
         };
 
+        componentWillUnmount() {
+            clearInterval(this.timer);
+        }
+
         render() {
             const { laps, running } = this.state;
             const buttonStyles = {
