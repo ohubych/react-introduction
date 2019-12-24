@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@16.3.1/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.3.1/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.26.0/babel.js"></script>
+<script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
+<script src="https://unpkg.com/vanilla-tilt@1.4.1/dist/vanilla-tilt.min.js"></script>
+
+<style>
+    .tilt-root {
+        height: 150px;
+        background-color: red;
+        width: 200px;
+        background-image: -webkit-linear-gradient(315deg, #ff00ba 0%, #fae713 100%);
+        background-image: linear-gradient(135deg, #ff00ba 0%, #fae713 100%);
+        transform-style: preserve-3d;
+        will-change: transform;
+        transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
+    }
+    .tilt-child {
+        position: absolute;
+        width: 50%;
+        height: 50%;
+        top: 50%;
+        left: 50%;
+        transform: translateZ(30px) translateX(-50%) translateY(-50%);
+        box-shadow: 0 0 50px 0 rgba(51, 51, 51, 0.3);
+        background-color: white;
+        display: flex;
+        justify-content: center;
+    }
+
+    .totally-centered {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
+
+<script type="text/babel">
+    // Make Basic Forms with React
+    const rootElement = document.getElementById('root');
+
+    class FormName extends React.Component {
+
+        componentDidMount() { }
+
+        submitHandle = (event) => {
+            event.preventDefault();
+            console.log(event.target[0].value);
+            console.log(event.target.elements.userName.value);
+            console.log(this.inputElement.value);
+        }
+
+        render() {
+            return (
+                <div>
+                    <form onSubmit={ this.submitHandle }>
+                        <label>
+                            Enter name
+                            <input type="text" name="userName" ref={ node => this.inputElement = node } />
+                        </label>
+                        <button type="submit">
+                            Submit
+                        </button>
+                    </form>
+                </div>
+            )
+        }
+    }
+
+    const element = (
+        <div>
+            <FormName />
+        </div>
+    );
+
+    ReactDOM.render(element, rootElement);
+
+</script>
+
+</body>
+</html>
