@@ -17,24 +17,33 @@
 
     class FormName extends React.Component {
 
-        componentDidMount() { }
+        state = { error: this.props.getErrorMessage('') };
 
         submitHandle = (event) => {
             event.preventDefault();
-            console.log(event.target[0].value);
-            console.log(event.target.elements.userName.value);
-            console.log(this.inputElement.value);
+            const error = this.props.getErrorMessage(this.inputElement.value);
+
+            if (error) {
+                console.error(error);
+            }
+        }
+
+        handlerChange = (event) => {
+            const { value } = event.target;
+            this.error = this.props.getErrorMessage(value);
+            this.setState({ error: this.error });
         }
 
         render() {
             return (
                 <div>
+                    { this.error ? <div style={ { color: 'red' } }> { this.error } </div> : null }
                     <form onSubmit={ this.submitHandle }>
                         <label>
-                            Enter name
-                            <input type="text" name="userName" ref={ node => this.inputElement = node } />
+                            Enter your name:
+                            <input type="text" name="userName" onChange={ this.handlerChange } ref={ node => this.inputElement = node } />
                         </label>
-                        <button type="submit">
+                        <button type="submit" disabled={this.state.error}>
                             Submit
                         </button>
                     </form>
@@ -45,7 +54,15 @@
 
     const element = (
         <div>
-            <FormName />
+            <FormName getErrorMessage={ value => {
+                if (value.length < 3 ) {
+                    return 'Value must be at least 3 characters'
+                }
+                if (!value.toLowerCase().includes('s')) {
+                    return 'Value does not include S'
+                }
+                return null;
+            } } />
         </div>
     );
 
